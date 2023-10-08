@@ -1,0 +1,16 @@
+
+QPushButton {
+    border: none;
+    background: transparent;
+    icon: url("./assets/icons/test-menu-widget-fav-normal.png");
+    icon-size: 32px;
+}
+
+QPushButton::hover {
+    icon: url("./assets/icons/test-menu-widget-fav-hover.png");
+}
+
+
+QPushButton::pressed {
+    icon: url("./assets/icons/test-menu-widget-fav-select.png");
+}

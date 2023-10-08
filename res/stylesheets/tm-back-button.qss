@@ -1,0 +1,15 @@
+QPushButton {
+    border: none;
+    background: transparent;
+    icon: url("./assets/icons/chevron-left-rounded-normal.png");
+    icon-size: 64px;
+}
+
+QPushButton::hover {
+    icon: url("./assets/icons/chevron-left-rounded-hover.png");
+}
+
+
+QPushButton::pressed {
+    icon: url("./assets/icons/chevron-left-rounded-select.png");
+}

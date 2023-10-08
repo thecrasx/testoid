@@ -1,0 +1,9 @@
+QPushButton {
+    text-align: left;
+	color: #EB8F8F;
+	border-radius: 0px;
+	padding-bottom: 3px;
+	border-bottom: 2px solid #7C46A4;
+	font-family: "Iosevka NF Medium";
+	font-size: 15px;
+}

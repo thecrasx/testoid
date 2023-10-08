@@ -1,0 +1,14 @@
+QPushButton {
+	border: none;
+    background: transparent;
+	icon: url("./assets/icons/ui-menu-grid-normal.png");
+	icon-size: 64px;
+}
+
+QPushButton::hover {
+	icon: url("./assets/icons/ui-menu-grid-hover.png");
+}
+
+QPushButton::pressed {
+    icon: url("./assets/icons/ui-menu-grid-select.png");
+}

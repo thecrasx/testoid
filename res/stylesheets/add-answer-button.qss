@@ -1,0 +1,17 @@
+QPushButton {
+	background-color: #644E76;
+	border: none;
+	border-radius: 18px;
+	icon: url("./assets/icons/add-normal.png");
+	icon-size: 32px;
+}
+
+QPushButton::hover {
+	background-color: #6C557E;
+	icon: url("./assets/icons/add-hover.png");
+}
+
+QPushButton::pressed {
+	background-color: #604973;
+	icon: url("./assets/icons/add-select.png");
+}

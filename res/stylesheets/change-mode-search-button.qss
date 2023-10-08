@@ -1,0 +1,14 @@
+QPushButton {
+	border: none;
+    background: transparent;
+	icon: url("./assets/icons/menu-left-right-normal.png");
+	icon-size: 64px;
+}
+
+QPushButton::hover {
+	icon: url("./assets/icons/menu-left-right-hover.png");
+}
+
+QPushButton::pressed {
+    icon: url("./assets/icons/menu-left-right-select.png");
+}

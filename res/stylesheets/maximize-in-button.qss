@@ -1,0 +1,15 @@
+QPushButton {
+    border: none;
+    background-color: transparent;
+    icon: url("./assets/icons/maximize-normal.png");
+    icon-size: 64px;
+}
+
+QPushButton::hover {
+    icon: url("./assets/icons/maximize-hover.png");
+}
+
+
+QPushButton::pressed {
+    icon: url("./assets/icons/maximize-select.png");
+}
