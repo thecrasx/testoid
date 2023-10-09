@@ -12,20 +12,10 @@ from testoid.Tools.stylesheet import load as ssLoad
 from testoid.TestMaker.test_maker import TestMaker
 from testoid.TestMaker.TestMakerMenu.test_maker_menu import TestMakerMenu
 from testoid.TestMaker.TestConfigurator.test_configurator import TestConfigurator
-from testoid.TestViewerOld.test_viewer import TestViewer as TestViewerOld
-from  testoid.TestViewer.test_viewer import TestViewer as TestViewerNew
+from testoid.TestViewer.test_viewer import TestViewer
 
 
 
-
-
-
-TEST_OLD = False
-
-if TEST_OLD:
-    TestViewer = TestViewerOld
-else:
-    TestViewer = TestViewerNew
 
 
 
@@ -187,7 +177,7 @@ class MainWindow(QMainWindow):
     """         TITLE BAR EVENTS         """
     ########################################
     def __mousePressEvent(self, event):
-         self.dragPos = event.globalPosition().toPoint()
+        self.dragPos = event.globalPosition().toPoint()
 
 
 
