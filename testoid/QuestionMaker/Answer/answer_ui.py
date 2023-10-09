@@ -94,7 +94,7 @@ class Ui_Answer(object):
 "	padding: 0px;\n"
 "}")
         icon = QIcon()
-        icon.addFile(u"../assets/icons/round-close-normal.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"../res/icons/round-close-normal.png", QSize(), QIcon.Normal, QIcon.Off)
         self.removeBtn.setIcon(icon)
         self.removeBtn.setIconSize(QSize(32, 32))
 

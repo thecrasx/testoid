@@ -57,7 +57,7 @@ class Ui_OptionWidget(object):
 "	padding: 0px;\n"
 "}")
         icon = QIcon()
-        icon.addFile(u"../assets/icons/chevron-left-rounded-hover.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"../res/icons/chevron-left-rounded-hover.png", QSize(), QIcon.Normal, QIcon.Off)
         self.prevBtn.setIcon(icon)
         self.prevBtn.setIconSize(QSize(32, 32))
 
@@ -82,7 +82,7 @@ class Ui_OptionWidget(object):
 "	padding: 0px;\n"
 "}")
         icon1 = QIcon()
-        icon1.addFile(u"../assets/icons/chevron-right-rounded-hover.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u"../res/icons/chevron-right-rounded-hover.png", QSize(), QIcon.Normal, QIcon.Off)
         self.nextBtn.setIcon(icon1)
         self.nextBtn.setIconSize(QSize(32, 32))
 

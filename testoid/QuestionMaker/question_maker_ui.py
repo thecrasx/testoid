@@ -174,7 +174,7 @@ class Ui_QuestionMaker(object):
 "}\n"
 "")
         icon = QIcon()
-        icon.addFile(u"../assets/icons/add-normal.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"../res/icons/add-normal.png", QSize(), QIcon.Normal, QIcon.Off)
         self.addAnswerBtn.setIcon(icon)
         self.addAnswerBtn.setIconSize(QSize(32, 32))
 

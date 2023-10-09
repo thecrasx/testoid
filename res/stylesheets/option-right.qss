@@ -1,14 +1,14 @@
 QPushButton {
 	border: none;
 	padding: 0px;
-    icon: url("./assets/icons/chevron-right-rounded-option-normal.png");
+    icon: url("./res/icons/chevron-right-rounded-option-normal.png");
     icon-size: 32px;
 }
 
 QPushButton::hover {
-    icon: url("./assets/icons/chevron-right-rounded-option-hover.png");
+    icon: url("./res/icons/chevron-right-rounded-option-hover.png");
 }
 
 QPushButton::pressed {
-    icon: url("./assets/icons/chevron-right-rounded-option-select.png");
+    icon: url("./res/icons/chevron-right-rounded-option-select.png");
 }

@@ -76,7 +76,7 @@ class Ui_MainWindow(object):
 "	background-color: transparent;\n"
 "}")
         icon = QIcon()
-        icon.addFile(u"../assets/icons/round-minimize-normal.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"../res/icons/round-minimize-normal.png", QSize(), QIcon.Normal, QIcon.Off)
         self.minimizeBtn.setIcon(icon)
         self.minimizeBtn.setIconSize(QSize(18, 18))
 
@@ -89,7 +89,7 @@ class Ui_MainWindow(object):
 "	background-color: transparent;\n"
 "}")
         icon1 = QIcon()
-        icon1.addFile(u"../assets/icons/maximize-normal.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u"../res/icons/maximize-normal.png", QSize(), QIcon.Normal, QIcon.Off)
         self.toggleMaximizeBtn.setIcon(icon1)
         self.toggleMaximizeBtn.setIconSize(QSize(18, 18))
 
@@ -102,7 +102,7 @@ class Ui_MainWindow(object):
 "	background-color: transparent;\n"
 "}")
         icon2 = QIcon()
-        icon2.addFile(u"../assets/icons/round-close-normal.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon2.addFile(u"../res/icons/round-close-normal.png", QSize(), QIcon.Normal, QIcon.Off)
         self.exitBtn.setIcon(icon2)
         self.exitBtn.setIconSize(QSize(18, 18))
 
@@ -234,7 +234,7 @@ class Ui_MainWindow(object):
 "	border:  none;\n"
 "}")
         icon3 = QIcon()
-        icon3.addFile(u"../assets/icons/settings-rounded-normal.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon3.addFile(u"../res/icons/settings-rounded-normal.png", QSize(), QIcon.Normal, QIcon.Off)
         self.settingsMenuBtn.setIcon(icon3)
         self.settingsMenuBtn.setIconSize(QSize(32, 32))
 

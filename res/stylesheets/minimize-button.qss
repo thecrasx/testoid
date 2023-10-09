@@ -1,15 +1,15 @@
 QPushButton {
     border: none;
     background-color: transparent;
-    icon: url("./assets/icons/round-minimize-normal.png");
+    icon: url("./res/icons/round-minimize-normal.png");
     icon-size: 64px;
 }
 
 QPushButton::hover {
-    icon: url("./assets/icons/round-minimize-hover.png");
+    icon: url("./res/icons/round-minimize-hover.png");
 }
 
 
 QPushButton::pressed {
-    icon: url("./assets/icons/round-minimize-select.png");
+    icon: url("./res/icons/round-minimize-select.png");
 }

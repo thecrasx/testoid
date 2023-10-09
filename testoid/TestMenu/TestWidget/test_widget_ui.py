@@ -70,7 +70,7 @@ class Ui_TestWidget(object):
 "	padding: 0px;\n"
 "}")
         icon = QIcon()
-        icon.addFile(u"../assets/icons/test-menu-widget-fav-normal.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"../res/icons/test-menu-widget-fav-normal.png", QSize(), QIcon.Normal, QIcon.Off)
         self.favoriteBtn.setIcon(icon)
         self.favoriteBtn.setIconSize(QSize(32, 32))
 
@@ -134,7 +134,7 @@ class Ui_TestWidget(object):
 "	padding: 0px;\n"
 "}")
         icon1 = QIcon()
-        icon1.addFile(u"../assets/icons/stats-normal.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u"../res/icons/stats-normal.png", QSize(), QIcon.Normal, QIcon.Off)
         self.statsBtn.setIcon(icon1)
         self.statsBtn.setIconSize(QSize(48, 48))
 
