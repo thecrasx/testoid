@@ -7,7 +7,7 @@ from testoid.TestViewer.test_viewer_ui import Ui_TestViewer
 from testoid.TestMaker.test_data import TestData
 from testoid.QuestionMaker.question_data import QuestionData
 from testoid.TestViewer.QuestionBar.question_bar import QuestionBar
-from testoid.TestViewerOld.tv_answer_label import TVAnswerLabel
+from testoid.TestViewer.tv_answer_label import TVAnswerLabel
 
 
 class TestViewer(QWidget):
