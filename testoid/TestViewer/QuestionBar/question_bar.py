@@ -17,21 +17,46 @@ class QuestionBar(QWidget):
         self.ui = Ui_QuestionBar()
         self.ui.setupUi(self)
 
+
+        self.ui.scrollArea.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.ui.scrollArea.verticalScrollBar().setDisabled(True)
+        self.ui.scrollArea.horizontalScrollBar().setInvertedControls(False)
+        self.ui.scrollArea.wheelEvent = self.__scrollAreaWheelEvent
+
         self.__customSignal = _CustomSignal()
         self.clicked = self.__customSignal.clicked
-
-    
 
         self.__buttons: list[QuestionBarButton] = []
         self.__prevButton: QuestionBarButton = None
         self.__buttonCount: int = 0
         self.__emitSelected: bool = True
 
+
         # Hide button for testing designs
         self.ui.testBtn.hide()
 
 
         self.show()
+
+
+
+
+    def __scrollAreaWheelEvent(self, event: QWheelEvent) -> None:
+        pixel_delta = event.pixelDelta()
+        angle_delta = event.angleDelta()
+
+        scroll_event = QWheelEvent(
+            event.position(),
+            event.globalPosition(),
+            QPoint(pixel_delta.y(), pixel_delta.x()),
+            QPoint(angle_delta.y(), angle_delta.x()), 
+            event.buttons(), 
+            event.modifiers(),event.phase(),
+            event.inverted(), event.source(),
+        )
+
+        QCoreApplication.sendEvent(self.ui.scrollArea.horizontalScrollBar(), scroll_event)
+
 
 
     def __onButtonSelect(self, button: QuestionBarButton):
@@ -51,6 +76,7 @@ class QuestionBar(QWidget):
     
     def addButton(self):
         button = QuestionBarButton(self.ui.buttonsFrame, self.__buttonCount + 1)
+        button.setCursor(Qt.CursorShape.PointingHandCursor)
         self.ui.buttonsFrameLayout.addWidget(button)
 
         button.setText(str(self.__buttonCount + 1))
