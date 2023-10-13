@@ -204,9 +204,9 @@ class Ui_TestViewer(object):
 
         self.questionButtonsFrameLayout.addWidget(self.prevNNextBtnFrame, 0, Qt.AlignLeft)
 
-        self.saveBtn = QPushButton(self.questionButtonsFrame)
-        self.saveBtn.setObjectName(u"saveBtn")
-        self.saveBtn.setStyleSheet(u"QPushButton {\n"
+        self.markBtn = QPushButton(self.questionButtonsFrame)
+        self.markBtn.setObjectName(u"markBtn")
+        self.markBtn.setStyleSheet(u"QPushButton {\n"
 "	background-color: #875DA8;\n"
 "	border: none;\n"
 "	border-bottom-left-radius: 15px;\n"
@@ -214,7 +214,7 @@ class Ui_TestViewer(object):
 "	padding: 5px 25px 5px 25px;\n"
 "}")
 
-        self.questionButtonsFrameLayout.addWidget(self.saveBtn, 0, Qt.AlignRight)
+        self.questionButtonsFrameLayout.addWidget(self.markBtn, 0, Qt.AlignRight)
 
 
         self.questionFrameLayout.addWidget(self.questionButtonsFrame)
@@ -300,7 +300,7 @@ class Ui_TestViewer(object):
         self.answerTypeLabel.setText(QCoreApplication.translate("TestViewer", u"answer type: multiple choice", None))
         self.prevBtn.setText("")
         self.nextBtn.setText("")
-        self.saveBtn.setText(QCoreApplication.translate("TestViewer", u"Save", None))
+        self.markBtn.setText(QCoreApplication.translate("TestViewer", u"Mark", None))
         self.label.setText(QCoreApplication.translate("TestViewer", u"text", None))
     # retranslateUi
 

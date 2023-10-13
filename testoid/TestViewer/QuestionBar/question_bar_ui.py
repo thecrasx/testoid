@@ -23,7 +23,7 @@ class Ui_QuestionBar(object):
     def setupUi(self, QuestionBar):
         if not QuestionBar.objectName():
             QuestionBar.setObjectName(u"QuestionBar")
-        QuestionBar.resize(212, 161)
+        QuestionBar.resize(351, 112)
         QuestionBar.setMaximumSize(QSize(16777215, 16777215))
         QuestionBar.setStyleSheet(u"QWidget{\n"
 "	background-color: #463851;\n"
@@ -36,17 +36,19 @@ class Ui_QuestionBar(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.scrollArea = QScrollArea(QuestionBar)
         self.scrollArea.setObjectName(u"scrollArea")
-        self.scrollArea.setMaximumSize(QSize(16777215, 55))
+        self.scrollArea.setMaximumSize(QSize(16777215, 16777215))
         self.scrollArea.setStyleSheet(u"QWidget{\n"
 "	border: 4px solid #7037E8;\n"
 "	border-radius: 10px;\n"
 "	background-color: #83527E;\n"
+"	padding-top: 2px;\n"
+"	padding-bottom: 2px;\n"
 "}\n"
 "\n"
 "QScrollBar:horizontal {\n"
 "	border: none;\n"
 "	background-color: #83527E;\n"
-"	height: 7px;\n"
+"	height: 4px;\n"
 "	margin: 0px 10px 0px 10px;\n"
 "	border-radius: 0px;\n"
 "	padding: 0px 0px 1px 0px;\n"
@@ -77,9 +79,9 @@ class Ui_QuestionBar(object):
 "QScrollBar::sub-line:horizontal:hover {	\n"
 "	background-color: #83527E;\n"
 "}\n"
-"QScrollBar::sub-line:horizontal:pressed {	\n"
-"	background-color: #8352"
-                        "7E\n"
+"QScrollBar::sub-line:h"
+                        "orizontal:pressed {	\n"
+"	background-color: #83527E\n"
 "}\n"
 "\n"
 "/* BTN BOTTOM - SCROLLBAR */\n"
@@ -112,7 +114,7 @@ class Ui_QuestionBar(object):
         self.scrollArea.setWidgetResizable(True)
         self.SAWC = QWidget()
         self.SAWC.setObjectName(u"SAWC")
-        self.SAWC.setGeometry(QRect(0, 0, 204, 47))
+        self.SAWC.setGeometry(QRect(0, 0, 339, 100))
         self.SAWC.setStyleSheet(u"QWidget{\n"
 "	border: none;\n"
 "	border-radius: 0px;\n"
@@ -161,10 +163,12 @@ class Ui_QuestionBar(object):
         self.testBtn.setStyleSheet(u"QPushButton {\n"
 "	background-color: #83527E;\n"
 "	border-right: 2px solid #DF7C7C;\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0 rgba(238, 80, 80, 255), stop:0.429268 rgba(131, 82, 126, 255));\n"
 "}\n"
 "\n"
 "QPushButton::hover {\n"
-"	background-color: qlineargradient(spread:pad, x1:0.501, y1:0.00568182, x2:0.510467, y2:1, stop:0 rgba(131, 82, 126, 255), stop:1 rgba(234, 108, 221, 255))\n"
+"	background-color: qlineargradient(spread:pad, x1:0.501, y1:0.00568182, x2:0.510467, y2:1, stop:0 rgba(131, 82, 126, 255), stop:1 rgba(234, 108, 221, 255));\n"
+"	background-color: qlineargradient(spread:pad, x1:0.5, y1:0, x2:0.5, y2:1, stop:0.15122 rgba(238, 80, 80, 255), stop:0.473171 rgba(223, 106, 211, 255))\n"
 "}")
 
         self.buttonsFrameLayout.addWidget(self.testBtn)

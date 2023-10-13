@@ -41,6 +41,7 @@ class TestViewer(QWidget):
         # Buttons
         self.ui.nextBtn.clicked.connect(self.nextQuestion)
         self.ui.prevBtn.clicked.connect(self.previousQuestion)
+        self.ui.markBtn.clicked.connect(self.__markQuestionSwitch)
 
         self.show()
 
@@ -71,8 +72,11 @@ class TestViewer(QWidget):
 
         self.ui.answerTypeLabel.setText(f"Answer Type: {question.answerType}")
         self.ui.question.setPlainText(question.question)
+        mark_text = "Unmark" if self.questionBar.isQuestionMarked() else "Mark"
+        self.ui.markBtn.setText(mark_text)
         
         self.__currentQuestionID = question.ID
+
         
 
 
@@ -242,6 +246,21 @@ class TestViewer(QWidget):
     def getResultViewerData(self) -> tuple[TestData, dict[int, list]]:
         self.saveSelection()
         return (self.__test, self.__selections.copy())
+
+    
+
+
+
+    def __markQuestionSwitch(self):
+        if self.questionBar.isQuestionMarked():
+            self.questionBar.unmarkQuestion()
+            self.ui.markBtn.setText("Mark")
+        else:
+            self.questionBar.markQuestion()
+            self.ui.markBtn.setText("Unmark")
+    
+
+
 
 
 

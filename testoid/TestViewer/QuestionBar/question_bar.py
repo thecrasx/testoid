@@ -1,5 +1,6 @@
 from PySide6.QtCore import *
 from PySide6.QtGui import *
+import PySide6.QtGui
 from PySide6.QtWidgets import *
 
 from testoid.TestViewer.QuestionBar.question_bar_ui import Ui_QuestionBar
@@ -23,20 +24,22 @@ class QuestionBar(QWidget):
         self.ui.scrollArea.horizontalScrollBar().setInvertedControls(False)
         self.ui.scrollArea.wheelEvent = self.__scrollAreaWheelEvent
 
+
         self.__customSignal = _CustomSignal()
         self.clicked = self.__customSignal.clicked
 
         self.__buttons: list[QuestionBarButton] = []
-        self.__prevButton: QuestionBarButton = None
+        self.__currentButton: QuestionBarButton = None
         self.__buttonCount: int = 0
         self.__emitSelected: bool = True
-
+        self.__marks: list[int] = []
 
         # Hide button for testing designs
         self.ui.testBtn.hide()
 
 
         self.show()
+
 
 
 
@@ -59,17 +62,19 @@ class QuestionBar(QWidget):
 
 
 
-    def __onButtonSelect(self, button: QuestionBarButton):
-        if self.__prevButton is not None:
-            self.__prevButton.setSelected(False)
 
-        self.__prevButton = button
+
+    def __onButtonSelect(self, button: QuestionBarButton):
+        if self.__currentButton is not None:
+            self.__currentButton.setSelected(False)
+
+        self.__currentButton = button
         
         if self.__emitSelected:
             self.clicked.emit(button.ID)
         else:
             self.__emitSelected = True
-
+        
 
 
 
@@ -123,6 +128,48 @@ class QuestionBar(QWidget):
         self.__buttons[button - 1].setSelected(True)
 
         self.__emitSelected = emit
+
+
+
+
+
+    def markQuestion(self, question_id: int = None):
+        if question_id is not None and question_id >= 0 and question_id <= self.__buttonCount:
+            button = self.__buttons[question_id - 1]
+        else:
+            button = self.__currentButton
+
+        button.mark()
+        self.__marks.append(button.ID)
+
+
+
+
+
+    
+    def unmarkQuestion(self, question_id: int = None):
+        if question_id is not None and question_id >= 0 and question_id <= self.__buttonCount:
+            button = self.__buttons[question_id - 1]
+        else:
+            button = self.__currentButton
+
+        button.unmark()
+        self.__marks.remove(button.ID)
+
+
+
+
+
+    def isQuestionMarked(self, question_id: int = None) -> bool:
+        if question_id is not None and question_id >= 0 and question_id <= self.__buttonCount:
+            return self.__buttons[question_id - 1].isMarked()
+        else:
+            return self.__currentButton.isMarked()
+
+        
+
+
+        
         
 
 
