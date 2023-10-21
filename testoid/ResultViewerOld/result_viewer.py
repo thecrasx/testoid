@@ -2,8 +2,8 @@ from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 
-from testoid.ResultViewer.result_viewer_ui import Ui_ResultViewer
-from testoid.ResultViewer.ResultViewerQuestion.rv_question import RVQuestion
+from testoid.ResultViewerOld.result_viewer_ui import Ui_ResultViewer
+from testoid.ResultViewerOld.ResultViewerQuestion.rv_question import RVQuestion
 from testoid.TestMaker.test_data import TestData
 # from testoid.QuestionMaker.question_data import QuestionData
 
