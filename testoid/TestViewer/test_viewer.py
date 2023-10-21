@@ -8,14 +8,32 @@ from testoid.TestMaker.test_data import TestData
 from testoid.QuestionMaker.question_data import QuestionData
 from testoid.TestViewer.QuestionBar.question_bar import QuestionBar
 from testoid.TestViewer.tv_answer_label import TVAnswerLabel
+from testoid.Overlay.test_overview_overlay import TestOverviewOverlay
+from testoid.Overview.QuestionOverview.question_overview import QuestionOverview
+from testoid.Tools.stylesheet import load as ssLoad
+from random import shuffle
+
+
 
 
 class TestViewer(QWidget):
-    def __init__(self, parent: QWidget | None = None):
+    def __init__(self, parent: QWidget | None = None, mainWindow: QWidget = None):
+        if mainWindow is None:
+            raise TypeError("mainWindow argument missing")
+
         super().__init__(parent)
 
         self.ui = Ui_TestViewer()
         self.ui.setupUi(self)
+
+
+
+        self.testOverviewOverlay = TestOverviewOverlay(mainWindow)
+        self.testOverviewOverlay.setTitleBarOffset(mainWindow.ui.titleBarFrame)
+        self.testOverviewOverlay.setParentResizeSignal(mainWindow.resized)
+        self.testOverviewOverlay.testOverview.ui.closeBtn.clicked.connect(
+            self.testOverviewOverlay.close
+        )
 
         self.questionBar = QuestionBar(self.ui.questionBarFrame)
         self.ui.questionBarFrameLayout.addWidget(self.questionBar)
@@ -24,7 +42,7 @@ class TestViewer(QWidget):
         
         self.__answerCount: int = 0
         self.__answerWidgetCount = 0
-        self.__answerWidgets = {}
+        self.__answerWidgets: dict[int, TVAnswerLabel] = {}
         self.__lastSelectedAnswer = None
 
 
@@ -43,15 +61,27 @@ class TestViewer(QWidget):
         self.ui.prevBtn.clicked.connect(self.previousQuestion)
         self.ui.markBtn.clicked.connect(self.__markQuestionSwitch)
 
+        self.ui.prevBtn.setStyleSheet(ssLoad("tv-prev-btn"))
+        self.ui.nextBtn.setStyleSheet(ssLoad("tv-next-btn"))
+        self.ui.overviewBtn.clicked.connect(self.__showTestOverview)
+
         self.show()
 
 
+
+    def __showTestOverview(self):
+        self.saveSelection()
+        self.testOverviewOverlay.show()
+
+        if self.ui.finishBtn.isHidden():
+            self.ui.finishBtn.show()
 
 
     
     def __setupQuestion(self, question: QuestionData):
         if question.ID == self.__currentQuestionID:
             return
+        
         
         self.saveSelection()
         self.clearSelections()
@@ -74,6 +104,7 @@ class TestViewer(QWidget):
         self.ui.question.setPlainText(question.question)
         mark_text = "Unmark" if self.questionBar.isQuestionMarked() else "Mark"
         self.ui.markBtn.setText(mark_text)
+
         
         self.__currentQuestionID = question.ID
 
@@ -97,6 +128,14 @@ class TestViewer(QWidget):
     def __onQuestionBarClick(self, button: int):
         question = self.getQuestion(button)
         self.__setupQuestion(question)
+
+
+
+    def __onJumpToQuestionClick(self, question_number):
+        # self.__setupQuestion(question)
+        # question = self.getquestion(question_number)
+        self.questionBar.setSelected(question_number)
+        self.testOverviewOverlay.hide()
 
 
 
@@ -133,10 +172,15 @@ class TestViewer(QWidget):
 
 
     def getNextQuestion(self) -> QuestionData | None:
-        if self.__currentQuestionID + 1 > len(self.__test.questions):
-            return None
+        if self.__currentQuestionID < len(self.__test.questions):
+            if self.__currentQuestionID == len(self.__test.questions) - 1:
+                if not self.ui.overviewBtn.isEnabled():
+                    self.ui.overviewBtn.setEnabled(True)
+
+            return self.__test.questions[self.__currentQuestionID]
+
+        return None
         
-        return self.__test.questions[self.__currentQuestionID]
 
 
 
@@ -148,20 +192,34 @@ class TestViewer(QWidget):
         self.clearSelections()
 
 
-
     
     def loadTest(self, test: TestData):
         if self.__currentQuestionID != -1:
             self.reset()
 
         self.__test = test
+        self.testOverviewOverlay.testOverview.setupTest(test)
         self.ui.testLabel.setText(test.name)
-        self.questionBar.setBarSize(len(test.questions))
+        self.questionBar.setBarSize(len(test.questions), True, )
+        self.questionBar.unmarkAllQuestions()
          
         for index, question in enumerate(test.questions):
             question.changeID(index + 1)
+            shuffle(question.answers)
+
+            qo = self.testOverviewOverlay.testOverview.getQuestionOverview(question.ID)
+            if not qo.jumpToQuestionSignalConnected:
+                qo.jumpToQuestionClicked.connect(self.__onJumpToQuestionClick)
+                qo.jumpToQuestionSignalConnected = True
 
         self.questionBar.setSelected(1)
+        
+        self.ui.overviewBtn.setDisabled(True)
+        self.ui.finishBtn.hide()
+
+
+
+
 
 
 
@@ -173,11 +231,19 @@ class TestViewer(QWidget):
         if question is None or self.__currentQuestionID == -1:
             return
         
+
         self.__selections[question.ID] = []
+        questionOverview = self.testOverviewOverlay.testOverview.getQuestionOverview(question.ID)
+
+        if questionOverview is not None:
+            questionOverview.removeUserAnswers()
+
 
         for i in range(1, self.__answerCount + 1):
             if self.__answerWidgets[i].isSelected():
                 self.__selections[question.ID].append(i)
+                questionOverview.addUserAnswer(self.__answerWidgets[i].text())
+                
 
 
 
@@ -258,6 +324,11 @@ class TestViewer(QWidget):
         else:
             self.questionBar.markQuestion()
             self.ui.markBtn.setText("Unmark")
+
+
+
+    def setupOverview(self):
+        pass
     
 
 

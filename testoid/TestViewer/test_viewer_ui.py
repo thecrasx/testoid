@@ -23,7 +23,7 @@ class Ui_TestViewer(object):
     def setupUi(self, TestViewer):
         if not TestViewer.objectName():
             TestViewer.setObjectName(u"TestViewer")
-        TestViewer.resize(1090, 825)
+        TestViewer.resize(781, 652)
         TestViewer.setStyleSheet(u"QWidget {\n"
 "	border: none;\n"
 "}")
@@ -67,7 +67,7 @@ class Ui_TestViewer(object):
 "	background-color: #F0977C;\n"
 "}")
 
-        self.subTopFrameLayout.addWidget(self.quitBtn, 0, Qt.AlignLeft)
+        self.subTopFrameLayout.addWidget(self.quitBtn, 0, Qt.AlignLeft|Qt.AlignTop)
 
         self.testLabel = QLabel(self.subTopFrame)
         self.testLabel.setObjectName(u"testLabel")
@@ -76,14 +76,39 @@ class Ui_TestViewer(object):
         font1.setPointSize(16)
         self.testLabel.setFont(font1)
 
-        self.subTopFrameLayout.addWidget(self.testLabel, 0, Qt.AlignHCenter)
+        self.subTopFrameLayout.addWidget(self.testLabel, 0, Qt.AlignHCenter|Qt.AlignTop)
 
-        self.finishBtn = QPushButton(self.subTopFrame)
-        self.finishBtn.setObjectName(u"finishBtn")
+        self.subTopButtonsFrame = QFrame(self.subTopFrame)
+        self.subTopButtonsFrame.setObjectName(u"subTopButtonsFrame")
+        self.subTopButtonsFrame.setFrameShape(QFrame.StyledPanel)
+        self.subTopButtonsFrame.setFrameShadow(QFrame.Raised)
+        self.subTopButtonsFrameLayout = QVBoxLayout(self.subTopButtonsFrame)
+        self.subTopButtonsFrameLayout.setSpacing(1)
+        self.subTopButtonsFrameLayout.setObjectName(u"subTopButtonsFrameLayout")
+        self.subTopButtonsFrameLayout.setContentsMargins(0, 0, 0, 0)
+        self.overviewBtn = QPushButton(self.subTopButtonsFrame)
+        self.overviewBtn.setObjectName(u"overviewBtn")
         font2 = QFont()
         font2.setFamilies([u"Iosevka NFM ExtraBold"])
         font2.setPointSize(11)
         font2.setBold(True)
+        self.overviewBtn.setFont(font2)
+        self.overviewBtn.setStyleSheet(u"QPushButton {\n"
+"	background-color: #F8A48A;\n"
+"	border: none;\n"
+"	padding: 5px 25px 5px 25px;\n"
+"	border-top-left-radius: 10px;\n"
+"	border-bottom-left-radius: 10px;\n"
+"}\n"
+"\n"
+"QPushButton::hover {\n"
+"	background-color: #F0977C;\n"
+"}")
+
+        self.subTopButtonsFrameLayout.addWidget(self.overviewBtn)
+
+        self.finishBtn = QPushButton(self.subTopButtonsFrame)
+        self.finishBtn.setObjectName(u"finishBtn")
         self.finishBtn.setFont(font2)
         self.finishBtn.setStyleSheet(u"QPushButton {\n"
 "	background-color: #F8A48A;\n"
@@ -97,7 +122,10 @@ class Ui_TestViewer(object):
 "	background-color: #F0977C;\n"
 "}")
 
-        self.subTopFrameLayout.addWidget(self.finishBtn, 0, Qt.AlignRight)
+        self.subTopButtonsFrameLayout.addWidget(self.finishBtn)
+
+
+        self.subTopFrameLayout.addWidget(self.subTopButtonsFrame, 0, Qt.AlignRight)
 
 
         self.topFrameLayout.addWidget(self.subTopFrame, 0, Qt.AlignTop)
@@ -179,25 +207,35 @@ class Ui_TestViewer(object):
         self.prevNNextBtnFrameLayout.setContentsMargins(0, 0, 0, 0)
         self.prevBtn = QPushButton(self.prevNNextBtnFrame)
         self.prevBtn.setObjectName(u"prevBtn")
+        self.prevBtn.setCursor(QCursor(Qt.PointingHandCursor))
         self.prevBtn.setStyleSheet(u"QPushButton {\n"
 "	background-color: #875DA8;\n"
 "	border: none;	\n"
 "	border-right: 1px solid #5C3E74;\n"
 "	border-bottom-left-radius: 15px;\n"
-"	padding: 5px 25px 5px 25px;\n"
+"	padding: 0px 20px 0px 20px;\n"
 "}")
+        icon = QIcon()
+        icon.addFile(u"../res/icons/tv-prev-btn-normal.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.prevBtn.setIcon(icon)
+        self.prevBtn.setIconSize(QSize(28, 28))
 
         self.prevNNextBtnFrameLayout.addWidget(self.prevBtn)
 
         self.nextBtn = QPushButton(self.prevNNextBtnFrame)
         self.nextBtn.setObjectName(u"nextBtn")
+        self.nextBtn.setCursor(QCursor(Qt.PointingHandCursor))
         self.nextBtn.setStyleSheet(u"QPushButton {\n"
 "	background-color: #875DA8;\n"
 "	border: none;\n"
 "	border-left: 1px solid #5C3E74;\n"
 "	border-bottom-right-radius: 15px;\n"
-"	padding: 5px 25px 5px 25px;\n"
+"	padding: 0px 20px 0px 20px;\n"
 "}")
+        icon1 = QIcon()
+        icon1.addFile(u"../res/icons/tv-next-btn-normal.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.nextBtn.setIcon(icon1)
+        self.nextBtn.setIconSize(QSize(28, 28))
 
         self.prevNNextBtnFrameLayout.addWidget(self.nextBtn)
 
@@ -206,12 +244,22 @@ class Ui_TestViewer(object):
 
         self.markBtn = QPushButton(self.questionButtonsFrame)
         self.markBtn.setObjectName(u"markBtn")
+        font5 = QFont()
+        font5.setFamilies([u"Iosevka NF Medium"])
+        font5.setPointSize(11)
+        self.markBtn.setFont(font5)
+        self.markBtn.setCursor(QCursor(Qt.PointingHandCursor))
         self.markBtn.setStyleSheet(u"QPushButton {\n"
 "	background-color: #875DA8;\n"
+"	color: #CBA3EB;\n"
 "	border: none;\n"
 "	border-bottom-left-radius: 15px;\n"
 "	border-bottom-right-radius: 15px;\n"
-"	padding: 5px 25px 5px 25px;\n"
+"	padding: 4px 25px 5px 25px;\n"
+"}\n"
+"\n"
+"QPushButton::hover {\n"
+"	color: #DBB6F8;\n"
 "}")
 
         self.questionButtonsFrameLayout.addWidget(self.markBtn, 0, Qt.AlignRight)
@@ -238,7 +286,7 @@ class Ui_TestViewer(object):
         self.answersSA.setWidgetResizable(True)
         self.SAWC = QWidget()
         self.SAWC.setObjectName(u"SAWC")
-        self.SAWC.setGeometry(QRect(0, 0, 1030, 487))
+        self.SAWC.setGeometry(QRect(0, 0, 721, 330))
         self.SAWCLayout = QVBoxLayout(self.SAWC)
         self.SAWCLayout.setSpacing(0)
         self.SAWCLayout.setObjectName(u"SAWCLayout")
@@ -295,7 +343,8 @@ class Ui_TestViewer(object):
         TestViewer.setWindowTitle(QCoreApplication.translate("TestViewer", u"Form", None))
         self.quitBtn.setText(QCoreApplication.translate("TestViewer", u"Quit", None))
         self.testLabel.setText(QCoreApplication.translate("TestViewer", u"Test", None))
-        self.finishBtn.setText(QCoreApplication.translate("TestViewer", u"Overview", None))
+        self.overviewBtn.setText(QCoreApplication.translate("TestViewer", u"Overview", None))
+        self.finishBtn.setText(QCoreApplication.translate("TestViewer", u"Finish", None))
         self.question.setPlainText(QCoreApplication.translate("TestViewer", u"aaaa", None))
         self.answerTypeLabel.setText(QCoreApplication.translate("TestViewer", u"answer type: multiple choice", None))
         self.prevBtn.setText("")

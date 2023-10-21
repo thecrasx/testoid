@@ -1,0 +1,19 @@
+QPushButton {
+	background-color: #875DA8;
+	border: none;	
+	border-right: 1px solid #5C3E74;
+	border-bottom-left-radius: 15px;
+	padding: 0px 20px 0px 20px;
+    icon: url("./res/icons/tv-prev-btn-normal.png");
+    icon-size: 28px;
+}
+
+
+QPushButton::hover {
+    icon: url("./res/icons/tv-prev-btn-hover.png");
+}
+
+
+QPushButton::pressed {
+    icon: url("./res/icons/tv-prev-btn-select.png");
+}
