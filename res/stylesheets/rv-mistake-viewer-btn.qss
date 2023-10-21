@@ -1,0 +1,15 @@
+QPushButton {
+    border: none;
+    background-color: transparent;
+    icon: url("./res/icons/show-mistakes-normal.png");
+    icon-size: 32px;
+}
+
+QPushButton::hover {
+    icon: url("./res/icons/show-mistakes-hover.png");
+}
+
+
+QPushButton::pressed {
+    icon: url("./res/icons/show-mistakes-select.png");
+}

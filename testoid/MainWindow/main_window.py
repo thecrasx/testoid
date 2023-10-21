@@ -1,6 +1,5 @@
 from PySide6.QtCore import *
 from PySide6.QtGui import *
-import PySide6.QtGui
 from PySide6.QtWidgets import *
 
 from testoid.MainWindow.main_window_ui import Ui_MainWindow
@@ -11,12 +10,13 @@ from testoid.Tools.stylesheet import load as ssLoad
 
 from testoid.TestMaker.test_maker import TestMaker
 from testoid.TestMaker.TestMakerMenu.test_maker_menu import TestMakerMenu
-from testoid.TestMaker.TestConfigurator.test_configurator import TestConfigurator
+# from testoid.TestMaker.TestConfigurator.test_configurator import TestConfigurator
 from testoid.TestViewer.test_viewer import TestViewer
 
 
 
-
+class _Signals(QObject):
+    resized = Signal()
 
 
 
@@ -26,9 +26,16 @@ class MainWindow(QMainWindow):
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.resize(1365, 800) 
+
+
+        # Signals
+        self.__signals = _Signals(self)
+        self.resized = self.__signals.resized
+
         self.__setupUI()
         self.__framelessWindow(True)
-        self.resize(1250, 800)
+
 
         # Title Bar Events
         self.ui.titleBarFrame.mousePressEvent = self.__mousePressEvent
@@ -44,17 +51,14 @@ class MainWindow(QMainWindow):
         self.ui.exitBtn.clicked.connect(self.close)
         self.ui.settingsMenuBtn.setStyleSheet(ssLoad("settings-button"))
         self.ui.exitBtn.setStyleSheet(ssLoad("close-button"))
+        
 
         # Size Grip
         self.sizeGrip = SizeGrip(self)
         self.sizeGrip.setGripWidth(10)
 
-        self.ui.f123.hide()
-
-
-
-
         self.show()
+        
 
 
 
@@ -66,8 +70,11 @@ class MainWindow(QMainWindow):
         self.ui.menuPages.setCurrentWidget(self.ui.testMakerMenuPage)
 
         # Result Viewer
-        self.resultViewer = ResultViewer(self.ui.resultViewerPage)
+        self.resultViewer = ResultViewer(self.ui.resultViewerPage, self)
         self.ui.resultViewerPageLayout.addWidget(self.resultViewer)
+        self.resultViewer.ui.continueBtn.clicked.connect(
+            lambda: self.ui.pages.setCurrentWidget(self.ui.testMenuPage)
+        )
 
         # Test Menu
         self.testMenu = TestMenu(self.ui.testMenuPage)
@@ -80,7 +87,7 @@ class MainWindow(QMainWindow):
         self.testMaker.testCreated.connect(self.testMenu.addTest)
 
         # Test Viewer
-        self.testViewer = TestViewer(self.ui.testViewerPage)
+        self.testViewer = TestViewer(self.ui.testViewerPage, self)
         self.ui.testViewerPageLayout.addWidget(self.testViewer)
 
         self.testViewer.ui.quitBtn.clicked.connect(
@@ -95,7 +102,7 @@ class MainWindow(QMainWindow):
 
         def finishTest():
             data = self.testViewer.getResultViewerData()
-            self.resultViewer.reset()
+            # self.resultViewer.reset()
             self.resultViewer.processTest(data[0], data[1])
             self.ui.pages.setCurrentWidget(self.ui.resultViewerPage)
 
@@ -141,6 +148,7 @@ class MainWindow(QMainWindow):
             print()
 
         self.testMakerMenu.ui.backBtn.clicked.connect(printQuestion)
+        # self.ui.pages.setCurrentWidget(self.ui.resultViewerPage)
 
 
 
@@ -157,18 +165,8 @@ class MainWindow(QMainWindow):
 
     def resizeEvent(self, event: QResizeEvent) -> None:
         super().resizeEvent(event)
-
+        self.resized.emit()
         self.sizeGrip.updateGeometry()
-
-
-    
-    def keyReleaseEvent(self, event: QKeyEvent) -> None:
-        if event.key() == Qt.Key.Key_Escape:
-            if self.ui.resultViewerPage.isVisible():
-                self.ui.pages.setCurrentWidget(self.ui.testMenuPage)
-
-        super().keyReleaseEvent(event)
-
 
 
 

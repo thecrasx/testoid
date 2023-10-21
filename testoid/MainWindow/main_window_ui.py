@@ -53,9 +53,10 @@ class Ui_MainWindow(object):
         self.titleLabel.setObjectName(u"titleLabel")
         font = QFont()
         font.setFamilies([u"FreeSans"])
+        font.setPointSize(11)
         self.titleLabel.setFont(font)
         self.titleLabel.setStyleSheet(u"QLabel {\n"
-"	color: #D6C1E5;\n"
+"	color: #BF8BF2;\n"
 "}")
 
         self.horizontalLayout.addWidget(self.titleLabel, 0, Qt.AlignHCenter)
@@ -76,7 +77,7 @@ class Ui_MainWindow(object):
 "	background-color: transparent;\n"
 "}")
         icon = QIcon()
-        icon.addFile(u"../res/icons/round-minimize-normal.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"../assets/icons/round-minimize-normal.png", QSize(), QIcon.Normal, QIcon.Off)
         self.minimizeBtn.setIcon(icon)
         self.minimizeBtn.setIconSize(QSize(18, 18))
 
@@ -89,7 +90,7 @@ class Ui_MainWindow(object):
 "	background-color: transparent;\n"
 "}")
         icon1 = QIcon()
-        icon1.addFile(u"../res/icons/maximize-normal.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u"../assets/icons/maximize-normal.png", QSize(), QIcon.Normal, QIcon.Off)
         self.toggleMaximizeBtn.setIcon(icon1)
         self.toggleMaximizeBtn.setIconSize(QSize(18, 18))
 
@@ -102,7 +103,7 @@ class Ui_MainWindow(object):
 "	background-color: transparent;\n"
 "}")
         icon2 = QIcon()
-        icon2.addFile(u"../res/icons/round-close-normal.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon2.addFile(u"../assets/icons/round-close-normal.png", QSize(), QIcon.Normal, QIcon.Off)
         self.exitBtn.setIcon(icon2)
         self.exitBtn.setIconSize(QSize(18, 18))
 
@@ -164,10 +165,7 @@ class Ui_MainWindow(object):
         self.testMenuBtn.setObjectName(u"testMenuBtn")
         sizePolicy1.setHeightForWidth(self.testMenuBtn.sizePolicy().hasHeightForWidth())
         self.testMenuBtn.setSizePolicy(sizePolicy1)
-        font1 = QFont()
-        font1.setFamilies([u"FreeSans"])
-        font1.setPointSize(11)
-        self.testMenuBtn.setFont(font1)
+        self.testMenuBtn.setFont(font)
         self.testMenuBtn.setStyleSheet(u"QPushButton {\n"
 "	background-color: #463851;\n"
 "	border: none;\n"
@@ -181,7 +179,7 @@ class Ui_MainWindow(object):
         self.historyMenuBtn.setObjectName(u"historyMenuBtn")
         sizePolicy1.setHeightForWidth(self.historyMenuBtn.sizePolicy().hasHeightForWidth())
         self.historyMenuBtn.setSizePolicy(sizePolicy1)
-        self.historyMenuBtn.setFont(font1)
+        self.historyMenuBtn.setFont(font)
         self.historyMenuBtn.setStyleSheet(u"QPushButton {\n"
 "	background-color: #463851;\n"
 "	border: none;\n"
@@ -206,7 +204,7 @@ class Ui_MainWindow(object):
         self.makeTestMenuBtn.setObjectName(u"makeTestMenuBtn")
         sizePolicy1.setHeightForWidth(self.makeTestMenuBtn.sizePolicy().hasHeightForWidth())
         self.makeTestMenuBtn.setSizePolicy(sizePolicy1)
-        self.makeTestMenuBtn.setFont(font1)
+        self.makeTestMenuBtn.setFont(font)
         self.makeTestMenuBtn.setStyleSheet(u"QPushButton {\n"
 "	background-color: #463851;\n"
 "	border: none;\n"
@@ -234,7 +232,7 @@ class Ui_MainWindow(object):
 "	border:  none;\n"
 "}")
         icon3 = QIcon()
-        icon3.addFile(u"../res/icons/settings-rounded-normal.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon3.addFile(u"../assets/icons/settings-rounded-normal.png", QSize(), QIcon.Normal, QIcon.Off)
         self.settingsMenuBtn.setIcon(icon3)
         self.settingsMenuBtn.setIconSize(QSize(32, 32))
 
@@ -297,15 +295,7 @@ class Ui_MainWindow(object):
         self.resultViewerPageLayout = QVBoxLayout(self.resultViewerPage)
         self.resultViewerPageLayout.setSpacing(0)
         self.resultViewerPageLayout.setObjectName(u"resultViewerPageLayout")
-        self.resultViewerPageLayout.setContentsMargins(90, 30, 90, 0)
-        self.f123 = QFrame(self.resultViewerPage)
-        self.f123.setObjectName(u"f123")
-        self.f123.setStyleSheet(u"background: white;")
-        self.f123.setFrameShape(QFrame.StyledPanel)
-        self.f123.setFrameShadow(QFrame.Raised)
-
-        self.resultViewerPageLayout.addWidget(self.f123)
-
+        self.resultViewerPageLayout.setContentsMargins(90, 30, 90, 30)
         self.pages.addWidget(self.resultViewerPage)
 
         self.horizontalLayout_4.addWidget(self.pages)
@@ -323,7 +313,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.versionLabel.setText("")
-        self.titleLabel.setText(QCoreApplication.translate("MainWindow", u"AWS", None))
+        self.titleLabel.setText(QCoreApplication.translate("MainWindow", u"Testoid", None))
         self.minimizeBtn.setText("")
         self.toggleMaximizeBtn.setText("")
 #if QT_CONFIG(whatsthis)
