@@ -8,6 +8,7 @@ class _StyleSheet:
     SELECTED = ssLoad("question-bar-button-selected")
     MARK_NORMAL = ssLoad("question-bar-button-mark-normal")
     MARK_SELECTED = ssLoad("question-bar-button-mark-selected")
+    DISABLED = ssLoad("question-bar-button-disabled")
 
 
 
@@ -48,6 +49,16 @@ class QuestionBarButton(QPushButton):
 
         if selected:
             self.selected.emit(self)
+
+    
+    def setDisabled(self):
+        super().setDisabled(True)
+        self.setStyleSheet(_StyleSheet.DISABLED)
+
+    
+    def setEnabled(self):
+        super().setEnabled(True)
+        self.setStyleSheet(_StyleSheet.NORMAL)
 
 
     def mark(self):

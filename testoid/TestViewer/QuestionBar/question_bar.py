@@ -1,6 +1,5 @@
 from PySide6.QtCore import *
 from PySide6.QtGui import *
-import PySide6.QtGui
 from PySide6.QtWidgets import *
 
 from testoid.TestViewer.QuestionBar.question_bar_ui import Ui_QuestionBar
@@ -79,7 +78,7 @@ class QuestionBar(QWidget):
 
 
     
-    def addButton(self):
+    def addButton(self, default_disabled = False):
         button = QuestionBarButton(self.ui.buttonsFrame, self.__buttonCount + 1)
         button.setCursor(Qt.CursorShape.PointingHandCursor)
         self.ui.buttonsFrameLayout.addWidget(button)
@@ -87,19 +86,24 @@ class QuestionBar(QWidget):
         button.setText(str(self.__buttonCount + 1))
         button.selected.connect(self.__onButtonSelect)
 
+        if default_disabled:
+            button.setDisabled()
+
         self.__buttons.append(button)
         self.__buttonCount += 1
 
 
 
 
-    def setBarSize(self, size: int):
+    def setBarSize(self, size: int, button_default_disabled = False):
+        addedButtons = 0
         if size == self.__buttonCount:
             return
 
         elif size > self.__buttonCount:
             for i in range(self.__buttonCount, size):
-                self.addButton()
+                self.addButton(button_default_disabled)
+                addedButtons += 1
 
         else:
             if size < 0:
@@ -116,6 +120,10 @@ class QuestionBar(QWidget):
                 self.__buttons = self.__buttons[:size]
                 self.__buttonCount = size
 
+        if button_default_disabled:
+            for i in range(0, self.__buttonCount - addedButtons):
+                self.__buttons[i].setDisabled()
+
 
     def resetBar(self):
         self.setBarSize(0)
@@ -125,6 +133,9 @@ class QuestionBar(QWidget):
         if button < 1 and button > self.__buttonCount:
             return
         
+        if not self.__buttons[button - 1].isEnabled():
+            self.__buttons[button - 1].setEnabled()
+
         self.__buttons[button - 1].setSelected(True)
 
         self.__emitSelected = emit
@@ -155,6 +166,12 @@ class QuestionBar(QWidget):
 
         button.unmark()
         self.__marks.remove(button.ID)
+
+
+    def unmarkAllQuestions(self):
+        for button in self.__buttons:
+            if button.isMarked():
+                button.unmark()
 
 
 
