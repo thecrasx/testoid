@@ -1,0 +1,15 @@
+QPushButton {
+    border: none;
+    background-color: transparent;
+    icon: url("./res/icons/jump-question-normal.png");
+    icon-size: 30px;
+}
+
+QPushButton::hover {
+    icon: url("./res/icons/jump-question-hover.png");
+}
+
+
+QPushButton::pressed {
+    icon: url("./res/icons/jump-question-select.png");
+}
